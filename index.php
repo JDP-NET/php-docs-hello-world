@@ -1,23 +1,8 @@
 <?php
-    function getClientIP(){
-  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-    $ip = $_SERVER['HTTP_CLIENT_IP'];
-  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-  } else {
-    $ip = $_SERVER['REMOTE_ADDR'];
-  }
-  return $ip;
-}
-
-$ipaddress = getClientIP();
-
-function ip_details($ip) {
-  $json = file_get_contents("http://ipinfo.io/{$ip}/geo");
-  $details = json_decode($json, true);
-  return $details;
-}
-
-$details = ip_details($ipaddress);
-echo $details['city'];
+$string = file_get_contents('http://ipinfo.io/8.8.8.8/geo');
+var_dump($string);
+$ipaddress = $_SERVER["REMOTE_ADDR"];
+var_dump($ipaddress); 
+$string2 = file_get_contents('http://ipinfo.io/'.$ipaddress.'/geo');
+var_dump($string2);
 ?>
