@@ -1,4 +1,4 @@
-<php>
+<?php
     function getClientIP(){
   if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
     $ip = $_SERVER['HTTP_CLIENT_IP'];
@@ -20,4 +20,4 @@ function ip_details($ip) {
 
 $details = ip_details($ipaddress);
 echo $details['city'];
-</php>
+?>
