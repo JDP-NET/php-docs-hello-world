@@ -24,9 +24,16 @@ function getUserIP() {
 
 // Function to get user's location based on IP address
 function getUserLocation($ip) {
-    $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
-    return $details->city;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, "http://ipinfo.io/{$ip}/json");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $response = curl_exec($ch);
+    curl_close($ch);
+    
+    $details = json_decode($response);
+    return $details->city ?? 'Unknown';
 }
+
 
 // Get current time in EST
 $current_time_est = getCurrentTimeEST();
