@@ -25,7 +25,7 @@ function getUserIP() {
 // Function to get user's location based on IP address
 function getUserLocation($ip) {
     $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
-    return $details->city . ', ' . $details->region . ', ' . $details->country;
+    return $details->city;
 }
 
 // Get current time in EST
