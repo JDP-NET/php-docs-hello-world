@@ -42,25 +42,16 @@ $current_time_est = getCurrentTimeEST();
 $user_ip = getUserIP();
 
 // Get user's location
-$user_location = getUserLocation($user_ip);
+$url = "https://ipinfo.io/{$user_ip}/json";
+
+// Fetch JSON data from the URL
+$json = file_get_contents($url);
+
 
 // Display results
 echo "Current Time in EST: $current_time_est<br>";
 echo "Your IP Address: $user_ip<br>";
-echo "Your Location: $user_location";
-
-$response = file_get_contents("http://ipinfo.io/{$ip}/json");
-$details = json_decode($response);
-
-if ($details === null) {
-    // JSON decoding failed
-    $error_code = json_last_error();
-    $error_message = json_last_error_msg();
-    echo "JSON decoding error (code: $error_code): $error_message";
-} else {
-    // JSON decoding successful
-    // Access JSON data as needed
-}
+echo "Your Location: $json";
 
 ?>
 
