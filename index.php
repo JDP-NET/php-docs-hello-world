@@ -42,7 +42,7 @@ $current_time_est = getCurrentTimeEST();
 $user_ip = getUserIP();
 
 // Get user's location
-$url = "https://ipinfo.io/69.171.141.182/json";
+$url = "https://ipinfo.io/$ip/json";
 
 // Fetch JSON data from the URL
 $json = file_get_contents($url);
