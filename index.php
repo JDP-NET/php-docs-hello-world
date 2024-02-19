@@ -1,15 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>My Information</title>
-</head>
-<body>
-    <h1>Current Time: <?php echo date("Y-m-d H:i:s"); ?></h1>
-    <h2>Your IP: <?php echo $_SERVER['REMOTE_ADDR']; ?></h2>
-    <?php
-        $ip = $_SERVER['REMOTE_ADDR'];
-        $details = json_decode(file_get_contents("http://ipinfo.io/{$ip}/json"));
-        echo "<h2>Your Location: " . $details->city . ", " . $details->country . "</h2>";
-    ?>
-</body>
-</html>
+<php>
+    function getClientIP(){
+  if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+    $ip = $_SERVER['HTTP_CLIENT_IP'];
+  } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  } else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+  }
+  return $ip;
+}
+
+$ipaddress = getClientIP();
+
+function ip_details($ip) {
+  $json = file_get_contents("http://ipinfo.io/{$ip}/geo");
+  $details = json_decode($json, true);
+  return $details;
+}
+
+$details = ip_details($ipaddress);
+echo $details['city'];
+</php>
